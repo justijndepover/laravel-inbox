@@ -18,5 +18,7 @@ class InterceptEmailsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/mail-interceptor.php' => config_path('mail-interceptor.php'),
         ]);
+
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 }
