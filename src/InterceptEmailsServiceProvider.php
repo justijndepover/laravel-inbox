@@ -2,7 +2,10 @@
 
 namespace Justijndepover\InterceptEmails;
 
+use Illuminate\Mail\Events\MessageSending;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Justijndepover\InterceptEmails\Listeners\EmailLogger;
 
 class InterceptEmailsServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,8 @@ class InterceptEmailsServiceProvider extends ServiceProvider
     public function boot()
     {
         if (! app()->isProduction()) {
+            Event::listen(MessageSending::class, EmailLogger::class);
+
             $this->publishes([
                 __DIR__.'/../config/mail-interceptor.php' => config_path('mail-interceptor.php'),
             ]);
