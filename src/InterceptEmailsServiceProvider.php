@@ -15,10 +15,11 @@ class InterceptEmailsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/../config/mail-interceptor.php' => config_path('mail-interceptor.php'),
-        ]);
+        if (! app()->isProduction()) {
+            $this->publishes([
+                __DIR__.'/../config/mail-interceptor.php' => config_path('mail-interceptor.php'),
+            ]);
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 }
