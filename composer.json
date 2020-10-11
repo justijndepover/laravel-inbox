@@ -1,0 +1,34 @@
+{
+    "name": "justijndepover/intercept-emails",
+    "description": "Intercept outgoing emails in your Laravel application",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Justijn Depover",
+            "email": "justijndepover@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Justijndepover\\InterceptEmails\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Justijndepover\\InterceptEmails\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Justijndepover\\InterceptEmails\\InterceptEmailsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
