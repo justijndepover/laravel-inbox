@@ -1,7 +1,7 @@
 <?php
 
-use Justijndepover\InterceptEmails\Controllers\EmailController;
+use Justijndepover\Inbox\Controllers\EmailController;
 
-Route::group(['middleware' => config('mail-interceptor.middleware')], function () {
-    Route::get(config('mail-interceptor.path') . '/{id?}', [EmailController::class, 'index'])->name('mail-interceptor');
+Route::group(['middleware' => config('inbox.middleware')], function () {
+    Route::get(config('inbox.path') . '/{id?}', [EmailController::class, 'index'])->name('inbox');
 });

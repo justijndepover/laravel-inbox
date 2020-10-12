@@ -1,6 +1,6 @@
 <?php
 
-namespace Justijndepover\InterceptEmails\Tests;
+namespace Justijndepover\Inbox\Tests;
 
 use Orchestra\Testbench\TestCase;
 

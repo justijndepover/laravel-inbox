@@ -1,5 +1,5 @@
 {
-    "name": "justijndepover/intercept-emails",
+    "name": "justijndepover/laravel-inbox",
     "description": "Intercept outgoing emails in your Laravel application",
     "license": "MIT",
     "authors": [
@@ -14,18 +14,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Justijndepover\\InterceptEmails\\": "src/"
+            "Justijndepover\\Inbox\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Justijndepover\\InterceptEmails\\Tests\\": "tests/"
+            "Justijndepover\\Inbox\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Justijndepover\\InterceptEmails\\InterceptEmailsServiceProvider"
+                "Justijndepover\\Inbox\\InboxServiceProvider"
             ]
         }
     },

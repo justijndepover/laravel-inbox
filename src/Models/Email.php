@@ -1,6 +1,6 @@
 <?php
 
-namespace Justijndepover\InterceptEmails\Models;
+namespace Justijndepover\Inbox\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

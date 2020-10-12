@@ -1,9 +1,9 @@
 <?php
 
-namespace Justijndepover\InterceptEmails\Controllers;
+namespace Justijndepover\Inbox\Controllers;
 
 use Illuminate\Routing\Controller;
-use Justijndepover\InterceptEmails\Models\Email;
+use Justijndepover\Inbox\Models\Email;
 
 class EmailController extends Controller
 {
@@ -16,7 +16,7 @@ class EmailController extends Controller
             $email = $emails->first();
         }
 
-        return view('mail-interceptor::index', [
+        return view('laravel-inbox::index', [
             'emails' => $emails,
             'email' => $email,
         ]);

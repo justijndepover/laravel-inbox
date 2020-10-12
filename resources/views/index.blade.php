@@ -36,7 +36,7 @@
                     </a>
 
                     @foreach ($emails as $sentEmail)
-                        <a href="{{ route('mail-interceptor', ['id' => $sentEmail->id]) }}" class="block bg-white hover:bg-gray-100 border-b text-sm">
+                        <a href="{{ route('inbox', ['id' => $sentEmail->id]) }}" class="block bg-white hover:bg-gray-100 border-b text-sm">
                             <div class="p-6 @if($sentEmail->id == $email->id) border-l-4 border-indigo-600 @endif">
                                 <div class="flex justify-between">
                                     <span class="font-semibold">{{ $sentEmail->from_name }}</span>

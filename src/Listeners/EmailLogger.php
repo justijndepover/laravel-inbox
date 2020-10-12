@@ -1,9 +1,9 @@
 <?php
 
-namespace Justijndepover\InterceptEmails\Listeners;
+namespace Justijndepover\Inbox\Listeners;
 
 use Illuminate\Mail\Events\MessageSending;
-use Justijndepover\InterceptEmails\Models\Email;
+use Justijndepover\Inbox\Models\Email;
 
 class EmailLogger
 {
