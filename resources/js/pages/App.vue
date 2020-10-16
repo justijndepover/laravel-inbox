@@ -5,7 +5,7 @@
         <main class="flex-1 overflow-scroll flex">
             <sidebar></sidebar>
 
-            <div class="flex-1 flex flex-col">
+            <div class="flex-1 flex flex-col overflow-scroll">
                 <router-view></router-view>
             </div>
         </main>
