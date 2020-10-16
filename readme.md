@@ -52,7 +52,7 @@ return [
 ## Usage
 The application will expose an endpoint at `/inbox`.
 
-By default, the package only works if your application environment is not set to production. You can change this behaviour by overwriting the `config('inbox.enabled')` setting.
+By default, the package only works if your application environment is not set to production. You can change this behaviour by overwriting the `inbox.enabled` setting.
 
 ## Authorization
 The `/inbox` endpoint is available to everyone. If you'd like to protect this route, you can do so by registering the following gate.
@@ -60,23 +60,24 @@ The `/inbox` endpoint is available to everyone. If you'd like to protect this ro
 ```php
 use Illuminate\Support\Facades\Gate;
 
-Gate::define('viewInbox', function ($user = null) {
-    return !app()->isProduction();
+Gate::define('viewInbox', function ($user) {
+    // your logic here
+    return $user->isAdmin();
 });
 ```
 
 A good place to do this is in your `AuthServiceProvider` that ships with Laravel by default.
 
 ## Use cases
-The main purpose for creating this package was to provide an alternative to [mailtrap](https://mailtrap.io). That's also why package only works if the application is not in production mode.
+The main purpose for creating this package was to provide an alternative to [mailtrap](https://mailtrap.io). That's also why the package only works if the application is not in production mode.
 
-If you want to use the package for the same reason, it's recommended to set your mail driver to `log` inside your env file.
+If you want to use the package for the same reason, it's recommended to set your mail driver to `log` inside your env file, to prevent your application from actually sending emails.
 ```
 MAIL_MAILER=log
 ```
 
 ## Security
-If you find any security related issues, please contact me directly at [justijndepover@gmail.com](justijndepover@gmail.com) to report it.
+If you find any security related issues, please open an issue or contact me directly at [justijndepover@gmail.com](justijndepover@gmail.com).
 
 ## Contribution
 If you wish to make any changes or improvements to the package, feel free to make a pull request.
