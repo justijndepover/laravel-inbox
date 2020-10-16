@@ -7,6 +7,9 @@ Add an inbox screen to your application to monitor all outgoing emails.
 
 ![Screenshot](https://raw.githubusercontent.com/justijndepover/laravel-inbox/master/docs/screenshot.png)
 
+## Caution
+This application is still in development and could implement breaking changes. Please use at your own risk.
+
 ## Installation
 You can install the package with composer
 ```
