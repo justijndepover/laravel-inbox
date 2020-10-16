@@ -1982,9 +1982,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch('getMails');
+  },
+  methods: {
+    refresh: function refresh() {
+      this.$store.dispatch('getMails');
+    }
   },
   computed: {
     mails: function mails() {
@@ -2714,11 +2721,11 @@ var render = function() {
     },
     [
       _c(
-        "a",
+        "button",
         {
           staticClass:
-            "block px-3 py-2 bg-gray-300 hover:bg-gray-400 border-b flex items-center text-gray-700 justify-center",
-          attrs: { href: "#" }
+            "px-3 py-2 bg-gray-300 hover:bg-gray-400 border-b flex items-center text-gray-700 justify-center w-full",
+          on: { click: _vm.refresh }
         },
         [
           _c(
@@ -2749,36 +2756,41 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._l(_vm.mails, function(mail) {
-        return _c(
-          "router-link",
-          {
-            key: mail.id,
-            staticClass: "block bg-white hover:bg-gray-100 text-sm",
-            attrs: {
-              to: { name: "mail", params: { id: mail.id } },
-              "active-class": "border-l-4 border-indigo-600"
-            }
-          },
-          [
-            _c("div", { staticClass: "p-6 border-b" }, [
-              _c("div", { staticClass: "flex justify-between" }, [
-                _c("span", { staticClass: "font-semibold" }, [
-                  _vm._v(_vm._s(mail.from_name))
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-gray-600" }, [
-                  _vm._v(_vm._s(mail.created_at))
-                ])
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(mail.subject))])
-            ])
-          ]
-        )
-      })
-    ],
-    2
+      _vm.mailsLoadStatus == 2
+        ? _c(
+            "div",
+            _vm._l(_vm.mails, function(mail) {
+              return _c(
+                "router-link",
+                {
+                  key: mail.id,
+                  staticClass: "block bg-white hover:bg-gray-100 text-sm",
+                  attrs: {
+                    to: { name: "mail", params: { id: mail.id } },
+                    "active-class": "border-l-4 border-indigo-600"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "p-6 border-b" }, [
+                    _c("div", { staticClass: "flex justify-between" }, [
+                      _c("span", { staticClass: "font-semibold" }, [
+                        _vm._v(_vm._s(mail.from_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "text-gray-600" }, [
+                        _vm._v(_vm._s(mail.created_at))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(mail.subject))])
+                  ])
+                ]
+              )
+            }),
+            1
+          )
+        : _vm._e()
+    ]
   )
 }
 var staticRenderFns = []
