@@ -7,7 +7,7 @@
 
         <title>Inbox{{ config('app.name') ? ' - ' . config('app.name') : '' }}</title>
 
-        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link href='{{ asset(mix('app.css', 'vendor/laravel-inbox')) }}' rel='stylesheet' type='text/css'>
     </head>
     <body class="antialiased bg-gray-100">
         <div id="app" class="flex flex-col h-screen">
@@ -114,5 +114,7 @@
                 </div>
             </main>
         </div>
+
+        <script src="{{ asset(mix('app.js', 'vendor/laravel-inbox')) }}"></script>
     </body>
 </html>
