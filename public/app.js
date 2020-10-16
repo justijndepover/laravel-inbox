@@ -2111,14 +2111,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.dispatch('getMail', this.$route.params.id);
+  },
+  computed: {
+    mail: function mail() {
+      return this.$store.getters.getMail;
+    },
+    mailLoadStatus: function mailLoadStatus() {
+      return this.$store.getters.getMailLoadStatus;
+    }
+  },
+  watch: {
+    '$route': function $route() {
+      this.$store.dispatch('getMail', this.$route.params.id);
+    }
+  }
+});
 
 /***/ }),
 
@@ -2875,13 +2885,109 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("span", { staticClass: "text-md text-gray-900" }, [
-          _vm._v("Email subject")
+          _vm.mailLoadStatus == 2
+            ? _c("span", [_vm._v(_vm._s(_vm.mail.subject))])
+            : _c("span", [_vm._v(" ")])
         ])
       ]
     ),
     _vm._v(" "),
     _c("div", { staticClass: "flex-1 p-8 overflow-scroll" }, [
-      _vm._m(0),
+      _vm.mailLoadStatus == 2
+        ? _c(
+            "div",
+            { staticClass: "bg-white rounded-lg border p-6 shadow-sm" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "border-b text-sm pb-4 mb-4 flex justify-between"
+                },
+                [
+                  _c("div", { staticClass: "flex-1" }, [
+                    _c("div", [
+                      _c("label", { staticClass: "font-semibold" }, [
+                        _vm._v("From: ")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(_vm.mail.from_name))]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-gray-600",
+                          attrs: { href: "mailto:" + _vm.mail.from_email }
+                        },
+                        [_vm._v("<" + _vm._s(_vm.mail.from_email) + ">")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("label", { staticClass: "font-semibold" }, [
+                        _vm._v("To: ")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(_vm.mail.to_name))]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-gray-600",
+                          attrs: { href: "mailto:" + _vm.mail.to_email }
+                        },
+                        [_vm._v("<" + _vm._s(_vm.mail.to_email) + ">")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.mail.cc
+                      ? _c(
+                          "div",
+                          _vm._l(_vm.mail.cc, function(emailaddress, name) {
+                            return _c("div", [
+                              _c("label", { staticClass: "font-semibold" }, [
+                                _vm._v("CC: ")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(name))]),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-gray-600",
+                                  attrs: { href: "mailto:" + emailaddress }
+                                },
+                                [_vm._v("<" + _vm._s(emailaddress) + ">")]
+                              ),
+                              _vm._v(" "),
+                              _c("br")
+                            ])
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("span", { staticClass: "text-sm text-gray-600" }, [
+                      _vm._v(_vm._s(_vm.mail.created_at))
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", {}, [
+                _c("iframe", {
+                  staticClass: "w-full",
+                  attrs: {
+                    src: "/inbox-api/" + _vm.mail.id + "/template",
+                    onload:
+                      "this.height = 0; this.height=this.contentWindow.document.body.scrollHeight;"
+                  }
+                })
+              ])
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "flex justify-center pt-8" }, [
         _c(
@@ -2918,62 +3024,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "bg-white rounded-lg border p-6 shadow-sm" },
-      [
-        _c(
-          "div",
-          { staticClass: "border-b text-sm pb-4 mb-4 flex justify-between" },
-          [
-            _c("div", { staticClass: "flex-1" }, [
-              _c("div", [
-                _c("label", { staticClass: "font-semibold" }, [
-                  _vm._v("From: ")
-                ]),
-                _vm._v(" "),
-                _c("span", [_vm._v("From name")]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-gray-600",
-                    attrs: { href: "mailto:From email" }
-                  },
-                  [_vm._v("<From email>")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c("label", { staticClass: "font-semibold" }, [_vm._v("To: ")]),
-                _vm._v(" "),
-                _c("span", [_vm._v("To name")]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-gray-600",
-                    attrs: { href: "mailto:To email" }
-                  },
-                  [_vm._v("<To email>")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div")
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", {})
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -20004,10 +20055,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
+    mail: {},
+    mailLoadStatus: 0,
     mails: [],
     mailsLoadStatus: 0
   },
   getters: {
+    getMail: function getMail(state) {
+      return state.mail;
+    },
+    getMailLoadStatus: function getMailLoadStatus(state) {
+      return state.mailLoadStatus;
+    },
     getMails: function getMails(state) {
       return state.mails;
     },
@@ -20016,6 +20075,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mutations: {
+    setMail: function setMail(state, mail) {
+      state.mail = mail;
+    },
+    setMailLoadStatus: function setMailLoadStatus(state, mailLoadStatus) {
+      state.mailLoadStatus = mailLoadStatus;
+    },
     setMails: function setMails(state, mails) {
       state.mails = mails;
     },
@@ -20024,8 +20089,19 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   actions: {
-    getMails: function getMails(_ref) {
+    getMail: function getMail(_ref, id) {
       var commit = _ref.commit;
+      commit('setMailLoadStatus', 1);
+      _helpers__WEBPACK_IMPORTED_MODULE_0__["axios"].get('/inbox-api/' + id).then(function (response) {
+        commit('setMail', response.data);
+        commit('setMailLoadStatus', 2);
+      })["catch"](function () {
+        commit('setMail', {});
+        commit('setMailLoadStatus', 3);
+      });
+    },
+    getMails: function getMails(_ref2) {
+      var commit = _ref2.commit;
       commit('setMailsLoadStatus', 1);
       _helpers__WEBPACK_IMPORTED_MODULE_0__["axios"].get('/inbox-api').then(function (response) {
         commit('setMails', response.data);

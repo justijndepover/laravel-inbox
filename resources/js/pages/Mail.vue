@@ -5,52 +5,45 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
 
-            <span class="text-md text-gray-900">Email subject</span>
+            <span class="text-md text-gray-900">
+                <span v-if="mailLoadStatus == 2">{{ mail.subject }}</span>
+                <span v-else>&nbsp;</span>
+            </span>
         </div>
 
         <div class="flex-1 p-8 overflow-scroll">
-            <div class="bg-white rounded-lg border p-6 shadow-sm">
+            <div class="bg-white rounded-lg border p-6 shadow-sm" v-if="mailLoadStatus == 2">
                 <div class="border-b text-sm pb-4 mb-4 flex justify-between">
                     <div class="flex-1">
                         <div>
                             <label class="font-semibold">From: </label>
-                            <span>From name</span>
-                            <a href="mailto:From email" class="text-gray-600">&lt;From email&gt;</a>
+                            <span>{{ mail.from_name }}</span>
+                            <a :href="'mailto:' + mail.from_email" class="text-gray-600">&lt;{{ mail.from_email }}&gt;</a>
                         </div>
+
                         <div>
                             <label class="font-semibold">To: </label>
-                            <span>To name</span>
-                            <a href="mailto:To email" class="text-gray-600">&lt;To email&gt;</a>
+                            <span>{{ mail.to_name }}</span>
+                            <a :href="'mailto:' + mail.to_email" class="text-gray-600">&lt;{{ mail.to_email }}&gt;</a>
                         </div>
-                        <!-- @if ($email->cc)
-                            <div>
-                                @foreach ($email->cc as $emailaddress => $name)
-                                    <label class="font-semibold @if (!$loop->first) text-white @endif">CC: </label>
-                                    <span>{{ $name }}</span>
-                                    <a href="mailto:{{ $emailaddress }}" class="text-gray-600">&lt;{{ $emailaddress }}&gt;</a>
-                                    <br>
-                                @endforeach
+
+                        <div v-if="mail.cc">
+                            <div v-for="(emailaddress, name) in mail.cc">
+                                <label class="font-semibold">CC: </label>
+                                <span>{{ name }}</span>
+                                <a :href="'mailto:' + emailaddress" class="text-gray-600">&lt;{{ emailaddress }}&gt;</a>
+                                <br>
                             </div>
-                        @endif
-                        @if ($email->bcc)
-                            <div>
-                                @foreach ($email->bcc as $emailaddress => $name)
-                                    <label class="font-semibold @if (!$loop->first) text-white @endif">BCC: </label>
-                                    <span>{{ $name }}</span>
-                                    <a href="mailto:{{ $emailaddress }}" class="text-gray-600">&lt;{{ $emailaddress }}&gt;</a>
-                                    <br>
-                                @endforeach
-                            </div>
-                        @endif -->
+                        </div>
                     </div>
 
                     <div>
-                        <!-- <span class="text-sm text-gray-600">{{ $email->created_at->format('H:i d/m/Y') }}</span> -->
+                        <span class="text-sm text-gray-600">{{ mail.created_at }}</span>
                     </div>
                 </div>
 
                 <div class="">
-                    <!-- {!! $email->body !!} -->
+                    <iframe :src="'/inbox-api/' + mail.id + '/template'" class="w-full" onload="this.height = 0; this.height=this.contentWindow.document.body.scrollHeight;"></iframe>
                 </div>
             </div>
 
@@ -67,5 +60,21 @@
 
 <script>
 export default {
+    created() {
+        this.$store.dispatch('getMail', this.$route.params.id);
+    },
+    computed: {
+        mail() {
+            return this.$store.getters.getMail;
+        },
+        mailLoadStatus() {
+            return this.$store.getters.getMailLoadStatus;
+        },
+    },
+    watch: {
+        '$route': function () {
+            this.$store.dispatch('getMail', this.$route.params.id);
+        }
+    }
 }
 </script>

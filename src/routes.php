@@ -8,6 +8,6 @@ Route::middleware(config('inbox.middleware'))->middleware(Authorize::class)->gro
     Route::get(config('inbox.path') . '/{id?}', EmailController::class)->name('inbox');
 
     Route::get('/inbox-api', [EmailApiController::class, 'index']);
-    Route::get('/inbox-api/{email}', [EmailController::class, 'show']);
-    Route::get('/inbox-api/{email}/template', [EmailController::class, 'template']);
+    Route::get('/inbox-api/{email}', [EmailApiController::class, 'show']);
+    Route::get('/inbox-api/{email}/template', [EmailApiController::class, 'template']);
 });
