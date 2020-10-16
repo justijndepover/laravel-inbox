@@ -4,6 +4,7 @@ namespace Justijndepover\Inbox;
 
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Justijndepover\Inbox\Listeners\EmailLogger;
 
@@ -30,6 +31,15 @@ class InboxServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
             $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-inbox');
+
+            $this->registerViewInboxGate();
         }
+    }
+
+    private function registerViewInboxGate()
+    {
+        Gate::define('viewInbox', function ($user = null) {
+            return !app()->isProduction();
+        });
     }
 }
