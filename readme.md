@@ -1,8 +1,11 @@
 # Laravel inbox
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/justijndepover/laravel-inbox.svg?style=flat-square)](https://packagist.org/packages/justijndepover/laravel-inbox)
+[![Total Downloads](https://img.shields.io/packagist/dt/justijndepover/laravel-inbox.svg?style=flat-square)](https://packagist.org/packages/justijndepover/laravel-inbox)
+
 This package is meant to provide your application with an interface to see all outgoing emails while the application is still in development.
 
-![Screenshot](/docs/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/justijndepover/laravel-inbox/master/docs/screenshot.png)
 
 ## installation
 You can install the package with composer
