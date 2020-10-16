@@ -11,25 +11,25 @@ class InboxServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/inbox.php', 'inbox'
-        );
+        $this->mergeConfigFrom(__DIR__ . '/../config/inbox.php', 'inbox');
     }
 
     public function boot()
     {
-        if (! app()->isProduction()) {
-            Event::listen(MessageSending::class, EmailLogger::class);
-
+        if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/inbox.php' => config_path('inbox.php'),
+                __DIR__ . '/../config/inbox.php' => config_path('inbox.php'),
             ]);
 
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        }
 
-            $this->loadRoutesFrom(__DIR__.'/routes.php');
+        if (config('inbox.enabled') || (config('inbox.enabled') == null && !app()->isProduction())) {
+            Event::listen(MessageSending::class, EmailLogger::class);
 
-            $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-inbox');
+            $this->loadRoutesFrom(__DIR__ . '/routes.php');
+
+            $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-inbox');
         }
     }
 }

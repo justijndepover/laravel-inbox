@@ -5,23 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {{-- <link rel="shortcut icon" href="{{ asset('/vendor/horizon/img/favicon.png') }}"> --}}
 
-        <title>Mails{{ config('app.name') ? ' - ' . config('app.name') : '' }}</title>
+        <title>Inbox{{ config('app.name') ? ' - ' . config('app.name') : '' }}</title>
 
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     </head>
     <body class="antialiased bg-gray-100">
         <div id="app" class="flex flex-col h-screen">
             <header class="bg-gray-800 flex p-3 items-center">
-                <div class="">
-                    <a href="https://justijn.netlify.app" target="_blank" class="block w-6 text-gray-300 hover:text-gray-600 transition duration-300">
-                        <svg class="" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300" fill="currentColor">
-                            <path d="M150,5.1L4.6,203.7L150,294.9l145.4-91.2L150,5.1z M150,272.3L32.1,198.4l31.7-43.3l27.8,17.4l-13.8,18.8 l36.5,22.9v-72.7V86.2L150,37.4V272.3z M185.7,141.5l36.5,49.8l-36.5,22.9V141.5z"/>
+                <div class="pr-3">
+                    <a href="/" class="block w-6 text-gray-400 hover:text-indigo-600 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M2.94 6.412A2 2 0 002 8.108V16a2 2 0 002 2h12a2 2 0 002-2V8.108a2 2 0 00-.94-1.696l-6-3.75a2 2 0 00-2.12 0l-6 3.75zm2.615 2.423a1 1 0 10-1.11 1.664l5 3.333a1 1 0 001.11 0l5-3.333a1 1 0 00-1.11-1.664L10 11.798 5.555 8.835z" clip-rule="evenodd" />
                         </svg>
                     </a>
                 </div>
 
                 <div class="flex-1 flex justify-center">
-                    <input type="search" placeholder="search..." class="bg-gray-700 focus:bg-gray-300 text-gray-500 focus:text-gray-800 focus:placeholder-gray-800 py-1 px-3 text-sm rounded outline-none transition duration-300" style="min-width: 32rem;">
+                    <input type="search" placeholder="search..." class="bg-gray-900 focus:bg-gray-200 text-gray-500 focus:text-gray-800 focus:placeholder-gray-800 py-1 px-3 text-sm rounded outline-none transition duration-300 w-full max-w-lg">
                 </div>
             </header>
 
@@ -101,6 +101,14 @@
                                 {{-- render in iframe to prevent css bleeding --}}
                                 {!! $email->body !!}
                             </div>
+                        </div>
+
+                        <div class="flex justify-center pt-8">
+                            <a href="https://justijn.netlify.app" target="_blank" class="block w-6 text-gray-200 hover:text-gray-600 transition duration-300">
+                                <svg class="" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300" fill="currentColor">
+                                    <path d="M150,5.1L4.6,203.7L150,294.9l145.4-91.2L150,5.1z M150,272.3L32.1,198.4l31.7-43.3l27.8,17.4l-13.8,18.8 l36.5,22.9v-72.7V86.2L150,37.4V272.3z M185.7,141.5l36.5,49.8l-36.5,22.9V141.5z"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>

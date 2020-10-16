@@ -3,28 +3,22 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
-    | Laravel Inbox Path
-    |--------------------------------------------------------------------------
-    |
-    | This is the URI path where Laravel Inbox will be accessible from. Feel free
-    | to change this path to anything you like. Note that the URI will not
-    | affect the paths of its internal API that aren't exposed to users.
-    |
+    * This setting determines if the Laravel Inbox package should Listen
+    * to Sending mail events. If the value is empty, the package will only
+    * work if the app is not in production mode
     */
+    'enabled' => null,
 
+    /*
+    * This is the URI path where Laravel Inbox will be accessible from.
+    */
     'path' => 'inbox',
 
     /*
-    |--------------------------------------------------------------------------
-    | Laravel Inbox Route Middleware
-    |--------------------------------------------------------------------------
-    |
-    | These middleware will get attached onto each Laravel Inbox route, giving you
-    | the chance to add your own middleware to this list or change any of
-    | the existing middleware. Or, you can simply stick with this list.
-    |
+    * These middleware will get attached onto each Laravel Inbox route, giving you
+    * the chance to add your own middleware to this list or change any of
+    * the existing middleware. Or, you can simply stick with this list.
     */
-
     'middleware' => ['web'],
+
 ];
