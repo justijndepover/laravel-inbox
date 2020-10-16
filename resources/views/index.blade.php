@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="base-path" content="{{ config('inbox.path') }}">
         {{-- <link rel="shortcut icon" href="{{ asset('/vendor/horizon/img/favicon.png') }}"> --}}
 
         <title>Inbox{{ config('app.name') ? ' - ' . config('app.name') : '' }}</title>
