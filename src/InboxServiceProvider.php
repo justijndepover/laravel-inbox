@@ -23,6 +23,10 @@ class InboxServiceProvider extends ServiceProvider
             ]);
 
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+            $this->publishes([
+                __DIR__ . '/../public' => public_path('vendor/laravel-inbox'),
+            ], 'laravel-inbox-assets');
         }
 
         if (config('inbox.enabled') == true || (config('inbox.enabled') === null && !app()->isProduction())) {
