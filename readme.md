@@ -16,7 +16,7 @@ You can install the package with composer
 composer require justijndepover/laravel-inbox
 ```
 
-After the installation, you should publish the assets
+After the installation, you have to publish the assets
 ```
 php artisan inbox:install
 ```
