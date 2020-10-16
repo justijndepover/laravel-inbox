@@ -24,7 +24,7 @@ class InboxServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
 
-        if (config('inbox.enabled') || (config('inbox.enabled') == null && !app()->isProduction())) {
+        if (config('inbox.enabled') == true || (config('inbox.enabled') === null && !app()->isProduction())) {
             Event::listen(MessageSending::class, EmailLogger::class);
 
             $this->loadRoutesFrom(__DIR__ . '/routes.php');
