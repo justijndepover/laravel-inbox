@@ -3,20 +3,74 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/justijndepover/laravel-inbox.svg?style=flat-square)](https://packagist.org/packages/justijndepover/laravel-inbox)
 [![Total Downloads](https://img.shields.io/packagist/dt/justijndepover/laravel-inbox.svg?style=flat-square)](https://packagist.org/packages/justijndepover/laravel-inbox)
 
-This package is meant to provide your application with an interface to see all outgoing emails while the application is still in development.
+Add an inbox screen to your application to monitor all outgoing emails.
 
 ![Screenshot](https://raw.githubusercontent.com/justijndepover/laravel-inbox/master/docs/screenshot.png)
 
-## installation
+## Installation
 You can install the package with composer
 ```
 composer require justijndepover/laravel-inbox
 ```
 
-## usage
-By default, the application will expose an endpoint at `/inbox` while the application is not in production mode.
+After the installation, you should publish the assets
+```
+php artisan inbox:install
+```
 
-It's recommended to set your mail driver to `log` inside your env file.
+If needed, you can also publish the config file
+```
+php artisan inbox:install --config
+```
+
+This is the config file
+```php
+return [
+
+    /*
+    * This setting determines if the Laravel Inbox package should Listen
+    * to Sending mail events. If the value is empty, the package will only
+    * work if the app is not in production mode
+    */
+    'enabled' => null,
+
+    /*
+    * This is the URI path where Laravel Inbox will be accessible from.
+    */
+    'path' => 'inbox',
+
+    /*
+    * These middleware will get attached onto each Laravel Inbox route, giving you
+    * the chance to add your own middleware to this list or change any of
+    * the existing middleware. Or, you can simply stick with this list.
+    */
+    'middleware' => ['web'],
+
+];
+```
+
+## Usage
+The application will expose an endpoint at `/inbox`.
+
+By default, the package only works if your application environment is not set to production. You can change this behaviour by overwriting the `config('inbox.enabled')` setting.
+
+## Authorization
+The `/inbox` endpoint is available to everyone. If you'd like to protect this route, you can do so by registering the following gate.
+
+```php
+use Illuminate\Support\Facades\Gate;
+
+Gate::define('viewInbox', function ($user = null) {
+    return !app()->isProduction();
+});
+```
+
+A good place to do this is in your `AuthServiceProvider` that ships with Laravel by default.
+
+## Use cases
+The main purpose for creating this package was to provide an alternative to [mailtrap](https://mailtrap.io). That's also why package only works if the application is not in production mode.
+
+If you want to use the package for the same reason, it's recommended to set your mail driver to `log` inside your env file.
 ```
 MAIL_MAILER=log
 ```
