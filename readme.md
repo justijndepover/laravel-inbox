@@ -21,9 +21,14 @@ After the installation, you have to publish the assets
 php artisan inbox:install
 ```
 
-If needed, you can also publish the config file
+And run the migration
 ```
-php artisan inbox:install --config
+php artisan migrate
+```
+
+If needed, you can also publish the config file and perform the migration immediately
+```
+php artisan inbox:install --config --migration
 ```
 
 This is the config file
