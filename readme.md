@@ -12,23 +12,18 @@ This application is still in development and could implement breaking changes. P
 
 ## Installation
 You can install the package with composer
-```
+```sh
 composer require justijndepover/laravel-inbox
 ```
 
-After the installation, you have to publish the assets
-```
-php artisan inbox:install
-```
-
-And run the migration
-```
-php artisan migrate
+After the installation, you have to publish the assets and perform the migration.
+```sh
+php artisan inbox:install --migration
 ```
 
-If needed, you can also publish the config file and perform the migration immediately
-```
-php artisan inbox:install --config --migration
+If needed, you can also publish the config file immediately
+```sh
+php artisan inbox:install --config
 ```
 
 This is the config file
