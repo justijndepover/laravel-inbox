@@ -45,7 +45,7 @@ class InboxServiceProvider extends ServiceProvider
 
     private function registerViewInboxGate()
     {
-        Gate::define('viewInbox', function ($user = null) {
+        Gate::define('viewInbox', function ($user) {
             return !app()->isProduction();
         });
     }
