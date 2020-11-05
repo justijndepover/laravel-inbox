@@ -9,6 +9,8 @@
                 <router-view></router-view>
             </div>
         </main>
+
+        <div class="fixed inset-0 bg-black z-10 opacity-25 lg:hidden transition-all duration-300" @click="closeMenu" :class="sidemenuIsOpen ? '' : 'hidden'"></div>
     </div>
 </template>
 
@@ -22,5 +24,15 @@ export default {
         Sidebar,
         HeaderNavigation,
     },
+    methods: {
+        closeMenu() {
+            this.$store.dispatch('closeSidemenu');
+        }
+    },
+    computed: {
+        sidemenuIsOpen() {
+            return this.$store.getters.getSidemenuOpen;
+        },
+    }
 }
 </script>

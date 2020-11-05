@@ -11,7 +11,7 @@
             </span>
         </div>
 
-        <div class="flex-1 p-8 overflow-scroll">
+        <div class="flex-1 p-4 lg:p-8 overflow-scroll">
             <div class="bg-white rounded-lg border p-6 shadow-sm" v-if="mailLoadStatus == 2">
                 <div class="border-b text-sm pb-4 mb-4 flex justify-between">
                     <div class="flex-1">
