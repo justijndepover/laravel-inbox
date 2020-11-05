@@ -13,7 +13,7 @@ class EmailApiController
             ->map(function ($email) {
                 return [
                     'id' => $email->id,
-                    'from_name' => $email->from_name,
+                    'to_name' => $email->to_name,
                     'subject' => $email->subject,
                     'created_at' => $email->created_at->format('d/m/Y'),
                 ];

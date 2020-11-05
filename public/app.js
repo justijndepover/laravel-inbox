@@ -2662,7 +2662,7 @@ var render = function() {
         "a",
         {
           staticClass:
-            "block w-6 text-gray-400 hover:text-indigo-600 transition duration-300",
+            "block w-6 text-gray-600 hover:text-indigo-600 transition duration-300",
           attrs: { href: "/" }
         },
         [
@@ -2861,7 +2861,7 @@ var render = function() {
                   staticClass: "block bg-white hover:bg-gray-100 text-sm",
                   attrs: {
                     to: { name: "mail", params: { id: mail.id } },
-                    "active-class": "border-l-4 border-indigo-600"
+                    "active-class": "border-l-4 border-indigo-600 bg-gray-100"
                   }
                 },
                 [
@@ -2874,7 +2874,7 @@ var render = function() {
                     [
                       _c("div", { staticClass: "flex justify-between" }, [
                         _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(_vm._s(mail.from_name))
+                          _vm._v(_vm._s(mail.to_name))
                         ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "text-gray-600" }, [
@@ -2978,7 +2978,7 @@ var render = function() {
         _c(
           "svg",
           {
-            staticClass: "w-5 h-5 mr-4 text-gray-900",
+            staticClass: "w-5 h-5 mr-4 text-gray-700",
             attrs: {
               xmlns: "http://www.w3.org/2000/svg",
               fill: "none",
