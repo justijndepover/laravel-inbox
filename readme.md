@@ -1,6 +1,7 @@
 # Laravel inbox
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/justijndepover/laravel-inbox.svg?style=flat-square)](https://packagist.org/packages/justijndepover/laravel-inbox)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/justijndepover/laravel-inbox.svg?style=flat-square)](https://packagist.org/packages/justijndepover/laravel-inbox)
 
 Add an inbox screen to your application to monitor all outgoing emails.
