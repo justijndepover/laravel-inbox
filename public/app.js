@@ -1960,6 +1960,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2733,11 +2743,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("input", {
-    staticClass:
-      "bg-gray-900 focus:bg-gray-200 text-gray-500 focus:text-gray-800 focus:placeholder-gray-800 py-1 px-3 text-sm rounded outline-none transition duration-300 w-full max-w-lg",
-    attrs: { type: "search", placeholder: "search..." }
-  })
+  return _c("div", { staticClass: "w-full max-w-lg relative rounded" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none"
+      },
+      [
+        _c("span", { staticClass: "text-gray-500 text-sm" }, [
+          _c(
+            "svg",
+            {
+              staticClass: "w-4 h-4",
+              attrs: {
+                fill: "none",
+                viewBox: "0 0 24 24",
+                stroke: "currentColor"
+              }
+            },
+            [
+              _c("path", {
+                attrs: {
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round",
+                  "stroke-width": "2",
+                  d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                }
+              })
+            ]
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("input", {
+      staticClass:
+        "w-full pl-8 py-1 pr-3 text-sm leading-5 rounded bg-gray-900 focus:bg-gray-200 text-gray-500 focus:text-gray-800 focus:placeholder-gray-800 transition duration-300 focus:outline-none",
+      attrs: { type: "search", placeholder: "Search..." }
+    })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
