@@ -8,11 +8,21 @@
             </span>
         </div>
 
-        <input class="w-full pl-8 py-1 pr-3 text-sm leading-5 rounded bg-gray-900 focus:bg-gray-200 text-gray-500 focus:text-gray-800 focus:placeholder-gray-800 transition duration-300 focus:outline-none" type="search" placeholder="Search...">
+        <input v-model="search" class="w-full pl-8 py-1 pr-3 text-sm leading-5 rounded bg-gray-900 focus:bg-gray-200 text-gray-500 focus:text-gray-800 focus:placeholder-gray-800 transition duration-300 focus:outline-none" type="search" placeholder="Search...">
     </div>
 </template>
 
 <script>
 export default {
+    computed: {
+        search: {
+            get() {
+                this.$store.state.search;
+            },
+            set(value) {
+                this.$store.dispatch('setSearch', value);
+            }
+        }
+    },
 }
 </script>

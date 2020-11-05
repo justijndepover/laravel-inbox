@@ -17,4 +17,17 @@ class Email extends Model
     {
         return json_decode($bcc);
     }
+
+    public function getTags()
+    {
+        return implode(' ', [
+            $this->from_email,
+            $this->from_name,
+            $this->to_email,
+            $this->to_name,
+            $this->cc,
+            $this->bcc,
+            $this->subject,
+        ]);
+    }
 }

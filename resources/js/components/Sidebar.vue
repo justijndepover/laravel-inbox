@@ -9,7 +9,7 @@
         </button>
 
         <div v-if="mailsLoadStatus == 2">
-            <router-link v-for="mail in mails" :key="mail.id" :to="{ name: 'mail', params: {id: mail.id} }" class="block bg-white hover:bg-gray-100 text-sm" active-class="border-l-4 border-indigo-600 bg-gray-100">
+            <router-link v-for="mail in filteredMails" :key="mail.id" :to="{ name: 'mail', params: {id: mail.id} }" class="block bg-white hover:bg-gray-100 text-sm" active-class="border-l-4 border-indigo-600 bg-gray-100">
                 <div class="p-6 border-b" @click="closeMenu">
                     <div class="flex justify-between">
                         <span class="font-semibold">{{ mail.to_name }}</span>
@@ -38,6 +38,11 @@ export default {
     computed: {
         mails() {
             return this.$store.getters.getMails;
+        },
+        filteredMails() {
+            return this.mails.filter(mail => {
+                return mail.tags.toLowerCase().includes(this.$store.getters.getSearch.toLowerCase());
+            });
         },
         mailsLoadStatus() {
             return this.$store.getters.getMailsLoadStatus;

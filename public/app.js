@@ -1970,7 +1970,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    search: {
+      get: function get() {
+        this.$store.state.search;
+      },
+      set: function set(value) {
+        this.$store.dispatch('setSearch', value);
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -2022,6 +2033,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     mails: function mails() {
       return this.$store.getters.getMails;
+    },
+    filteredMails: function filteredMails() {
+      var _this = this;
+
+      return this.mails.filter(function (mail) {
+        return mail.tags.toLowerCase().includes(_this.$store.getters.getSearch.toLowerCase());
+      });
     },
     mailsLoadStatus: function mailsLoadStatus() {
       return this.$store.getters.getMailsLoadStatus;
@@ -2778,9 +2796,26 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.search,
+          expression: "search"
+        }
+      ],
       staticClass:
         "w-full pl-8 py-1 pr-3 text-sm leading-5 rounded bg-gray-900 focus:bg-gray-200 text-gray-500 focus:text-gray-800 focus:placeholder-gray-800 transition duration-300 focus:outline-none",
-      attrs: { type: "search", placeholder: "Search..." }
+      attrs: { type: "search", placeholder: "Search..." },
+      domProps: { value: _vm.search },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.search = $event.target.value
+        }
+      }
     })
   ])
 }
@@ -2853,7 +2888,7 @@ var render = function() {
       _vm.mailsLoadStatus == 2
         ? _c(
             "div",
-            _vm._l(_vm.mails, function(mail) {
+            _vm._l(_vm.filteredMails, function(mail) {
               return _c(
                 "router-link",
                 {
@@ -20151,7 +20186,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _mails__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mails */ "./resources/js/store/mails.js");
-/* harmony import */ var _sidemenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sidemenu */ "./resources/js/store/sidemenu.js");
+/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search */ "./resources/js/store/search.js");
+/* harmony import */ var _sidemenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sidemenu */ "./resources/js/store/sidemenu.js");
+
 
 
 
@@ -20160,7 +20197,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     mails: _mails__WEBPACK_IMPORTED_MODULE_2__["default"],
-    sidemenu: _sidemenu__WEBPACK_IMPORTED_MODULE_3__["default"]
+    search: _search__WEBPACK_IMPORTED_MODULE_3__["default"],
+    sidemenu: _sidemenu__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 }));
 
@@ -20234,6 +20272,39 @@ __webpack_require__.r(__webpack_exports__);
         commit('setMails', {});
         commit('setMailsLoadStatus', 3);
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/search.js":
+/*!**************************************!*\
+  !*** ./resources/js/store/search.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    search: ''
+  },
+  getters: {
+    getSearch: function getSearch(state) {
+      return state.search;
+    }
+  },
+  mutations: {
+    setSearchState: function setSearchState(state, data) {
+      state.search = data;
+    }
+  },
+  actions: {
+    setSearch: function setSearch(_ref, data) {
+      var commit = _ref.commit;
+      commit('setSearchState', data);
     }
   }
 });
