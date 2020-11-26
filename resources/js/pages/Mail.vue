@@ -48,7 +48,7 @@
             </div>
 
             <div class="flex justify-center pt-8">
-                <a href="https://justijn.netlify.app" target="_blank" class="block w-6 text-gray-200 hover:text-gray-600 transition duration-300">
+                <a href="https://justijn.com" target="_blank" class="block w-6 text-gray-200 hover:text-gray-600 transition duration-300">
                     <svg class="" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300" fill="currentColor">
                         <path d="M150,5.1L4.6,203.7L150,294.9l145.4-91.2L150,5.1z M150,272.3L32.1,198.4l31.7-43.3l27.8,17.4l-13.8,18.8 l36.5,22.9v-72.7V86.2L150,37.4V272.3z M185.7,141.5l36.5,49.8l-36.5,22.9V141.5z"/>
                     </svg>

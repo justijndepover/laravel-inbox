@@ -9,7 +9,11 @@
         </button>
 
         <div v-if="mailsLoadStatus == 2">
-            <router-link v-for="mail in filteredMails" :key="mail.id" :to="{ name: 'mail', params: {id: mail.id} }" class="block bg-white hover:bg-gray-100 text-sm" active-class="border-l-4 border-indigo-600 bg-gray-100">
+            <router-link v-for="mail in filteredMails" :key="mail.id" :to="{ name: 'mail', params: {id: mail.id} }" class="block bg-white hover:bg-gray-100 text-sm relative" active-class="border-l-4 border-indigo-600 bg-gray-100">
+                <div v-if="!mail.read" class="absolute right-0 top-0 p-2">
+                    <span class="w-2 h-2 bg-indigo-200 rounded-full block"></span>
+                </div>
+
                 <div class="p-6 border-b" @click="closeMenu">
                     <div class="flex justify-between">
                         <span class="font-semibold">{{ mail.to_name }}</span>

@@ -34,6 +34,13 @@ export default {
         setMailsLoadStatus(state, mailsLoadStatus) {
             state.mailsLoadStatus = mailsLoadStatus;
         },
+        markMailAsRead(state, id) {
+            let mail = state.mails.find((element) => { return element.id === id })
+
+            if (mail) {
+                mail.read = true;
+            }
+        },
     },
     actions: {
         getMail({ commit }, id) {
@@ -44,6 +51,7 @@ export default {
                     .then(response => {
                         commit('setMail', response.data);
                         commit('setMailLoadStatus', 2);
+                        commit('markMailAsRead', id);
                     }).catch(() => {
                         commit('setMail', {});
                         commit('setMailLoadStatus', 3);

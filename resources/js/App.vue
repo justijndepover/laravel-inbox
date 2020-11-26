@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Sidebar from '../components/Sidebar.vue';
-import HeaderNavigation from '../components/HeaderNavigation.vue';
+import Sidebar from './components/Sidebar.vue';
+import HeaderNavigation from './components/HeaderNavigation.vue';
 
 export default {
     name: "App",

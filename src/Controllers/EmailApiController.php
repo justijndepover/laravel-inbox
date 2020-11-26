@@ -16,6 +16,7 @@ class EmailApiController
                     'to_name' => $email->to_name,
                     'subject' => $email->subject,
                     'created_at' => $email->created_at->format('d/m/Y'),
+                    'read' => $email->read,
                     'tags' => $email->getTags(),
                 ];
             });
@@ -26,6 +27,7 @@ class EmailApiController
     public function show($id)
     {
         $email = Email::findOrFail($id);
+        $email->markRead();
 
         return response()->json([
             'id' => $email->id,

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Email extends Model
 {
     protected $fillable = ['from_email', 'from_name', 'to_email', 'to_name', 'cc', 'bcc', 'subject', 'body'];
+    protected $casts = [
+        'read' => 'boolean',
+    ];
 
     public function getCcAttribute($cc)
     {
@@ -29,5 +32,11 @@ class Email extends Model
             $this->bcc,
             $this->subject,
         ]);
+    }
+
+    public function markRead()
+    {
+        $this->read = true;
+        $this->save();
     }
 }
