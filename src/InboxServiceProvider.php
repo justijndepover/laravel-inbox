@@ -25,7 +25,11 @@ class InboxServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/inbox.php' => config_path('inbox.php'),
             ], 'laravel-inbox-config');
 
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            if (! class_exists('CreateEmailsTable')) {
+                $this->publishes([
+                    __DIR__ . '/../database/migrations/create_emails_table.php' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_emails_table.php'),
+                ], 'laravel-inbox-migration');
+            }
 
             $this->publishes([
                 __DIR__ . '/../public' => public_path('vendor/laravel-inbox'),

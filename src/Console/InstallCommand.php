@@ -25,6 +25,7 @@ class InstallCommand extends Command
 
         if ($this->option('migration')) {
             $this->comment('Running the migrations...');
+            $this->callSilent('vendor:publish', ['--tag' => 'laravel-inbox-migration']);
             $this->callSilent('migrate');
         }
 

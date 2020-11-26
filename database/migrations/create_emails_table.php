@@ -22,6 +22,7 @@ class CreateEmailsTable extends Migration
             $table->text('cc')->nullable();
             $table->text('bcc')->nullable();
             $table->string('subject')->nullable();
+            $table->boolean('read')->default(false);
             $table->text('body');
             $table->timestamps();
         });
