@@ -15,7 +15,7 @@
         "cross-env": "^7.0",
         "laravel-mix": "^5.0.1",
         "laravel-mix-purgecss": "^5.0.0",
-        "tailwindcss": "^1.9.2",
+        "tailwindcss": "^2.0.1",
         "vue": "^2.6.12",
         "vue-router": "^3.4.7",
         "vuex": "^3.5.1"
