@@ -9,34 +9,45 @@ Add an inbox screen to your application to monitor all outgoing emails.
 ![Screenshot](https://raw.githubusercontent.com/justijndepover/laravel-inbox/master/docs/screenshot.png)
 
 ## Caution
+
 This application is still in development and could implement breaking changes. Please use at your own risk.
 
 ## Installation
+
 You can install the package with composer
+
 ```sh
 composer require justijndepover/laravel-inbox
 ```
 
 After the installation, you have to publish the assets and perform the migration.
+
 ```sh
 php artisan inbox:install --migration
 ```
 
 If needed, you can also publish the config file immediately
+
 ```sh
 php artisan inbox:install --config
 ```
 
 This is the config file
+
 ```php
 return [
 
     /*
     * This setting determines if the Laravel Inbox package should Listen
-    * to Sending mail events. If the value is empty, the package will only
-    * work if the app is not in production mode
+    * to Sending mail events.
     */
-    'enabled' => null,
+    'listener_enabled' => (config('app.env') != 'production'),
+
+    /*
+    * This setting determines if the Laravel Inbox package should open up
+    * the endpoint to view the inbox application.
+    */
+    'application_enabled' => (config('app.env') != 'production'),
 
     /*
     * This is the URI path where Laravel Inbox will be accessible from.
@@ -54,11 +65,13 @@ return [
 ```
 
 ## Usage
+
 The application will expose an endpoint at `/inbox`.
 
 By default, the package only works if your application environment is not set to production. You can change this behaviour by overwriting the `inbox.enabled` setting.
 
 ## Authorization
+
 The `/inbox` endpoint is available to everyone. If you'd like to protect this route, you can do so by registering the following gate.
 
 ```php
@@ -73,18 +86,23 @@ Gate::define('viewInbox', function ($user) {
 A good place to do this is in your `AuthServiceProvider` that ships with Laravel by default.
 
 ## Use cases
+
 The main purpose for creating this package was to provide an alternative to [mailtrap](https://mailtrap.io). That's also why the package only works if the application is not in production mode.
 
 If you want to use the package for the same reason, it's recommended to set your mail driver to `log` inside your env file, to prevent your application from actually sending emails.
+
 ```
 MAIL_MAILER=log
 ```
 
 ## Security
+
 If you find any security related issues, please open an issue or contact me directly at [justijndepover@gmail.com](justijndepover@gmail.com).
 
 ## Contribution
+
 If you wish to make any changes or improvements to the package, feel free to make a pull request.
 
 ## License
+
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

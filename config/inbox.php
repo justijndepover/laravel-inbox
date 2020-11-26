@@ -4,10 +4,15 @@ return [
 
     /*
     * This setting determines if the Laravel Inbox package should Listen
-    * to Sending mail events. If the value is empty, the package will only
-    * work if the app is not in production mode
+    * to Sending mail events.
     */
-    'enabled' => null,
+    'listener_enabled' => (config('app.env') != 'production'),
+
+    /*
+    * This setting determines if the Laravel Inbox package should open up
+    * the endpoint to view the inbox application.
+    */
+    'application_enabled' => (config('app.env') != 'production'),
 
     /*
     * This is the URI path where Laravel Inbox will be accessible from.

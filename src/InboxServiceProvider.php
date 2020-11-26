@@ -32,9 +32,11 @@ class InboxServiceProvider extends ServiceProvider
             ], 'laravel-inbox-assets');
         }
 
-        if (config('inbox.enabled') == true || (config('inbox.enabled') === null && !app()->isProduction())) {
+        if (config('inbox.listener_enabled') == true) {
             Event::listen(MessageSending::class, EmailLogger::class);
+        }
 
+        if (config('inbox.application_enabled') == true) {
             $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
             $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-inbox');
