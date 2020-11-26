@@ -20,6 +20,7 @@ export default new Router({
         },
         {
             path: "*",
+            name: "no-mail",
             component: require("../pages/NoMail.vue").default,
         },
     ],

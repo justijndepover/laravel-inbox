@@ -24,9 +24,8 @@ class EmailApiController
         return response()->json($emails);
     }
 
-    public function show($id)
+    public function show(Email $email)
     {
-        $email = Email::findOrFail($id);
         $email->markRead();
 
         return response()->json([
@@ -40,6 +39,13 @@ class EmailApiController
             'subject' => $email->subject,
             'created_at' => $email->created_at->format('d/m/Y H:i'),
         ]);
+    }
+
+    public function destroy(Email $email)
+    {
+        $email->delete();
+
+        return response(null, 204);
     }
 
     public function template($id)

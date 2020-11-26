@@ -1910,6 +1910,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Sidebar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Sidebar.vue */ "./resources/js/components/Sidebar.vue");
 /* harmony import */ var _components_HeaderNavigation_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/HeaderNavigation.vue */ "./resources/js/components/HeaderNavigation.vue");
+/* harmony import */ var _components_DeleteModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/DeleteModal.vue */ "./resources/js/components/DeleteModal.vue");
 //
 //
 //
@@ -1926,13 +1927,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   components: {
     Sidebar: _components_Sidebar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    HeaderNavigation: _components_HeaderNavigation_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    HeaderNavigation: _components_HeaderNavigation_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    DeleteModal: _components_DeleteModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     closeMenu: function closeMenu() {
@@ -1942,6 +1947,67 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     sidemenuIsOpen: function sidemenuIsOpen() {
       return this.$store.getters.getSidemenuOpen;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeleteModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeleteModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    hideModal: function hideModal() {
+      this.$store.dispatch('setDeleteMail', 0);
+    },
+    confirmModal: function confirmModal() {
+      this.$store.dispatch('deleteMail');
+      this.$router.push({
+        name: 'no-mail'
+      });
+    }
+  },
+  computed: {
+    show: function show() {
+      return this.$store.getters.getDeleteMail;
     }
   }
 });
@@ -2174,6 +2240,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch('getMail', this.$route.params.id);
@@ -2184,6 +2258,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     mailLoadStatus: function mailLoadStatus() {
       return this.$store.getters.getMailLoadStatus;
+    }
+  },
+  methods: {
+    deleteMail: function deleteMail() {
+      this.$store.dispatch('setDeleteMail', this.mail.id);
     }
   },
   watch: {
@@ -2700,6 +2779,8 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c("delete-modal"),
+      _vm._v(" "),
       _c("div", {
         staticClass:
           "fixed inset-0 bg-black z-10 opacity-25 lg:hidden transition-all duration-300",
@@ -2709,6 +2790,143 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeleteModal.vue?vue&type=template&id=cae0bcb2&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeleteModal.vue?vue&type=template&id=cae0bcb2& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.show
+    ? _c("div", { staticClass: "absolute inset-0" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-full h-full flex items-start justify-center p-3 sm:items-center"
+          },
+          [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.show,
+                    expression: "show"
+                  }
+                ],
+                staticClass:
+                  "shadow-sm border rounded-lg overflow-hidden w-full max-w-md z-40"
+              },
+              [
+                _c("div", { staticClass: "bg-white p-4 relative" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "absolute top-0 right-0 p-3 cursor-pointer",
+                      on: { click: _vm.hideModal }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "w-4 h-4 text-gray-500",
+                          attrs: {
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            stroke: "currentColor"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d: "M6 18L18 6M6 6l12 12"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "h2",
+                    {
+                      staticClass:
+                        "font-semibold text-gray-700 tracking-wide mb-2"
+                    },
+                    [_vm._v("Delete mail")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-sm text-gray-500" }, [
+                    _vm._v("Are you sure you want to delete this mail?")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "bg-gray-100 p-4 flex items-center justify-end"
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "rounded-md px-4 py-2 text-gray-800 hover:bg-gray-200 text-sm",
+                        attrs: { type: "button" },
+                        on: { click: _vm.hideModal }
+                      },
+                      [_vm._v("\n                    Cancel\n                ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "ml-2 rounded-md px-4 py-2 bg-indigo-500 text-indigo-100 hover:bg-indigo-400 text-sm",
+                        attrs: { type: "button" },
+                        on: { click: _vm.confirmModal }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Confirm\n                "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "bg-black opacity-25 inset-0 fixed z-30",
+          on: { click: _vm.hideModal }
+        })
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3022,37 +3240,76 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
-      { staticClass: "bg-white border-b shadow-sm p-4 flex items-center" },
+      {
+        staticClass:
+          "bg-white border-b shadow-sm flex items-center justify-between"
+      },
       [
+        _c("div", { staticClass: "flex items-center p-4" }, [
+          _c(
+            "svg",
+            {
+              staticClass: "w-5 h-5 mr-4 text-gray-700",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                fill: "none",
+                viewBox: "0 0 24 24",
+                stroke: "currentColor"
+              }
+            },
+            [
+              _c("path", {
+                attrs: {
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round",
+                  "stroke-width": "2",
+                  d:
+                    "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-md text-gray-900" }, [
+            _vm.mailLoadStatus == 2
+              ? _c("span", [_vm._v(_vm._s(_vm.mail.subject))])
+              : _c("span", [_vm._v(" ")])
+          ])
+        ]),
+        _vm._v(" "),
         _c(
-          "svg",
+          "button",
           {
-            staticClass: "w-5 h-5 mr-4 text-gray-700",
-            attrs: {
-              xmlns: "http://www.w3.org/2000/svg",
-              fill: "none",
-              viewBox: "0 0 24 24",
-              stroke: "currentColor"
-            }
+            staticClass:
+              "p-2 m-2 rounded hover:bg-gray-100 transition duration-100",
+            on: { click: _vm.deleteMail }
           },
           [
-            _c("path", {
-              attrs: {
-                "stroke-linecap": "round",
-                "stroke-linejoin": "round",
-                "stroke-width": "2",
-                d:
-                  "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              }
-            })
+            _c(
+              "svg",
+              {
+                staticClass: "w-5 h-5 text-gray-700",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  fill: "none",
+                  viewBox: "0 0 24 24",
+                  stroke: "currentColor"
+                }
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "round",
+                    "stroke-width": "2",
+                    d:
+                      "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  }
+                })
+              ]
+            )
           ]
-        ),
-        _vm._v(" "),
-        _c("span", { staticClass: "text-md text-gray-900" }, [
-          _vm.mailLoadStatus == 2
-            ? _c("span", [_vm._v(_vm._s(_vm.mail.subject))])
-            : _c("span", [_vm._v(" ")])
-        ])
+        )
       ]
     ),
     _vm._v(" "),
@@ -19804,6 +20061,75 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 /***/ }),
 
+/***/ "./resources/js/components/DeleteModal.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/DeleteModal.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DeleteModal_vue_vue_type_template_id_cae0bcb2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteModal.vue?vue&type=template&id=cae0bcb2& */ "./resources/js/components/DeleteModal.vue?vue&type=template&id=cae0bcb2&");
+/* harmony import */ var _DeleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteModal.vue?vue&type=script&lang=js& */ "./resources/js/components/DeleteModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteModal_vue_vue_type_template_id_cae0bcb2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DeleteModal_vue_vue_type_template_id_cae0bcb2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DeleteModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DeleteModal.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/DeleteModal.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeleteModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DeleteModal.vue?vue&type=template&id=cae0bcb2&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/DeleteModal.vue?vue&type=template&id=cae0bcb2& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_template_id_cae0bcb2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteModal.vue?vue&type=template&id=cae0bcb2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeleteModal.vue?vue&type=template&id=cae0bcb2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_template_id_cae0bcb2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteModal_vue_vue_type_template_id_cae0bcb2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/HeaderNavigation.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/HeaderNavigation.vue ***!
@@ -20181,6 +20507,7 @@ if (document.head.querySelector('meta[name="base-path"]')) {
     component: __webpack_require__(/*! ../pages/Mail.vue */ "./resources/js/pages/Mail.vue")["default"]
   }, {
     path: "*",
+    name: "no-mail",
     component: __webpack_require__(/*! ../pages/NoMail.vue */ "./resources/js/pages/NoMail.vue")["default"]
   }]
 }));
@@ -20234,7 +20561,8 @@ __webpack_require__.r(__webpack_exports__);
     mail: {},
     mailLoadStatus: 0,
     mails: [],
-    mailsLoadStatus: 0
+    mailsLoadStatus: 0,
+    deleteMail: 0
   },
   getters: {
     getMail: function getMail(state) {
@@ -20248,6 +20576,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     getMailsLoadStatus: function getMailsLoadStatus(state) {
       return state.mailsLoadStatus;
+    },
+    getDeleteMail: function getDeleteMail(state) {
+      return state.deleteMail;
     }
   },
   mutations: {
@@ -20271,6 +20602,9 @@ __webpack_require__.r(__webpack_exports__);
       if (mail) {
         mail.read = true;
       }
+    },
+    setDeleteMail: function setDeleteMail(state, id) {
+      state.deleteMail = id;
     }
   },
   actions: {
@@ -20295,6 +20629,21 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function () {
         commit('setMails', {});
         commit('setMailsLoadStatus', 3);
+      });
+    },
+    setDeleteMail: function setDeleteMail(_ref3, id) {
+      var commit = _ref3.commit;
+      commit('setDeleteMail', id);
+    },
+    deleteMail: function deleteMail(_ref4) {
+      var commit = _ref4.commit,
+          state = _ref4.state,
+          dispatch = _ref4.dispatch;
+      _helpers__WEBPACK_IMPORTED_MODULE_0__["axios"]["delete"]('/inbox-api/' + state.deleteMail).then(function (response) {
+        commit('setDeleteMail', 0);
+        dispatch('getMails');
+      })["catch"](function () {
+        commit('setDeleteMail', 0);
       });
     }
   }

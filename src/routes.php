@@ -10,6 +10,7 @@ Route::middleware(config('inbox.middleware'))->group(function () {
 
         Route::get('/inbox-api', [EmailApiController::class, 'index']);
         Route::get('/inbox-api/{email}', [EmailApiController::class, 'show']);
+        Route::delete('/inbox-api/{email}', [EmailApiController::class, 'destroy']);
         Route::get('/inbox-api/{email}/template', [EmailApiController::class, 'template']);
     });
 });

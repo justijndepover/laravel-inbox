@@ -6,6 +6,7 @@ export default {
         mailLoadStatus: 0,
         mails: [],
         mailsLoadStatus: 0,
+        deleteMail: 0,
     },
     getters: {
         getMail(state) {
@@ -19,6 +20,9 @@ export default {
         },
         getMailsLoadStatus(state) {
             return state.mailsLoadStatus;
+        },
+        getDeleteMail(state) {
+            return state.deleteMail;
         },
     },
     mutations: {
@@ -40,6 +44,9 @@ export default {
             if (mail) {
                 mail.read = true;
             }
+        },
+        setDeleteMail(state, id) {
+            state.deleteMail = id;
         },
     },
     actions: {
@@ -70,5 +77,18 @@ export default {
                         commit('setMailsLoadStatus', 3);
                     });
         },
+        setDeleteMail({ commit }, id) {
+            commit('setDeleteMail', id);
+        },
+        deleteMail({ commit, state, dispatch }) {
+            axios
+                .delete('/inbox-api/' + state.deleteMail)
+                    .then(response => {
+                        commit('setDeleteMail', 0);
+                        dispatch('getMails');
+                    }).catch(() => {
+                        commit('setDeleteMail', 0);
+                    });
+        }
     }
 }
