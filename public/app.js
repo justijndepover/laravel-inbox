@@ -2137,16 +2137,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch('getMails');
   },
   methods: {
     refresh: function refresh() {
-      this.$store.dispatch('getMails');
+      this.$store.dispatch('refreshMails');
     },
     closeMenu: function closeMenu() {
       this.$store.dispatch('closeSidemenu');
+    },
+    loadMore: function loadMore() {
+      this.$store.dispatch('getNextMails');
     }
   },
   computed: {
@@ -2162,6 +2167,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     mailsLoadStatus: function mailsLoadStatus() {
       return this.$store.getters.getMailsLoadStatus;
+    },
+    mailsHasNextPage: function mailsHasNextPage() {
+      return this.$store.getters.getMailsHasNextPage;
     },
     sidemenuIsOpen: function sidemenuIsOpen() {
       return this.$store.getters.getSidemenuOpen;
@@ -3164,52 +3172,64 @@ var render = function() {
       _vm.mailsLoadStatus == 2
         ? _c(
             "div",
-            _vm._l(_vm.filteredMails, function(mail) {
-              return _c(
-                "router-link",
-                {
-                  key: mail.id,
-                  staticClass:
-                    "block bg-white hover:bg-gray-100 text-sm relative",
-                  attrs: {
-                    to: { name: "mail", params: { id: mail.id } },
-                    "active-class": "border-l-4 border-indigo-600 bg-gray-100"
-                  }
-                },
-                [
-                  !mail.read
-                    ? _c("div", { staticClass: "absolute right-0 top-0 p-2" }, [
-                        _c("span", {
-                          staticClass:
-                            "w-2 h-2 bg-indigo-200 rounded-full block"
-                        })
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "p-6 border-b",
-                      on: { click: _vm.closeMenu }
-                    },
-                    [
-                      _c("div", { staticClass: "flex justify-between" }, [
-                        _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(_vm._s(mail.to_name))
+            [
+              _vm._l(_vm.filteredMails, function(mail) {
+                return _c(
+                  "router-link",
+                  {
+                    key: mail.id,
+                    staticClass:
+                      "block bg-white hover:bg-gray-100 text-sm relative",
+                    attrs: {
+                      to: { name: "mail", params: { id: mail.id } },
+                      "active-class": "border-l-4 border-indigo-600 bg-gray-100"
+                    }
+                  },
+                  [
+                    !mail.read
+                      ? _c(
+                          "div",
+                          { staticClass: "absolute right-0 top-0 p-2" },
+                          [
+                            _c("span", {
+                              staticClass:
+                                "w-2 h-2 bg-indigo-200 rounded-full block"
+                            })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "p-6 border-b",
+                        on: { click: _vm.closeMenu }
+                      },
+                      [
+                        _c("div", { staticClass: "flex justify-between" }, [
+                          _c("span", { staticClass: "font-semibold" }, [
+                            _vm._v(_vm._s(mail.to_name))
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "text-gray-600" }, [
+                            _vm._v(_vm._s(mail.created_at))
+                          ])
                         ]),
                         _vm._v(" "),
-                        _c("span", { staticClass: "text-gray-600" }, [
-                          _vm._v(_vm._s(mail.created_at))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v(_vm._s(mail.subject))])
-                    ]
-                  )
-                ]
-              )
-            }),
-            1
+                        _c("span", [_vm._v(_vm._s(mail.subject))])
+                      ]
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _vm.mailsHasNextPage
+                ? _c("button", { on: { click: _vm.loadMore } }, [
+                    _vm._v("Load more")
+                  ])
+                : _vm._e()
+            ],
+            2
           )
         : _vm._e()
     ]
@@ -20048,8 +20068,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.devtools = false;
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false; // Vue.config.devtools = false
+
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#app",
   router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -20555,6 +20575,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers/index.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
@@ -20562,6 +20594,8 @@ __webpack_require__.r(__webpack_exports__);
     mailLoadStatus: 0,
     mails: [],
     mailsLoadStatus: 0,
+    mailsPage: 1,
+    mailsHasNextPage: false,
     deleteMail: 0
   },
   getters: {
@@ -20576,6 +20610,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     getMailsLoadStatus: function getMailsLoadStatus(state) {
       return state.mailsLoadStatus;
+    },
+    getMailsPage: function getMailsPage(state) {
+      return state.mailsPage;
+    },
+    getMailsHasNextPage: function getMailsHasNextPage(state) {
+      return state.mailsHasNextPage;
     },
     getDeleteMail: function getDeleteMail(state) {
       return state.deleteMail;
@@ -20593,6 +20633,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     setMailsLoadStatus: function setMailsLoadStatus(state, mailsLoadStatus) {
       state.mailsLoadStatus = mailsLoadStatus;
+    },
+    setMailsPage: function setMailsPage(state, page) {
+      state.mailsPage = page;
+    },
+    setMailsHasNextPage: function setMailsHasNextPage(state, hasNextPage) {
+      state.mailsHasNextPage = hasNextPage;
     },
     markMailAsRead: function markMailAsRead(state, id) {
       var mail = state.mails.find(function (element) {
@@ -20621,24 +20667,46 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getMails: function getMails(_ref2) {
-      var commit = _ref2.commit;
-      commit('setMailsLoadStatus', 1);
-      _helpers__WEBPACK_IMPORTED_MODULE_0__["axios"].get('/inbox-api').then(function (response) {
-        commit('setMails', response.data);
+      var commit = _ref2.commit,
+          state = _ref2.state;
+
+      if (state.mailsLoadStatus != 2) {
+        commit('setMailsLoadStatus', 1);
+      }
+
+      _helpers__WEBPACK_IMPORTED_MODULE_0__["axios"].get('/inbox-api?page=' + state.mailsPage).then(function (response) {
+        commit('setMailsHasNextPage', response.data.current_page < response.data.last_page);
+        commit('setMails', [].concat(_toConsumableArray(state.mails), _toConsumableArray(response.data.data)));
         commit('setMailsLoadStatus', 2);
       })["catch"](function () {
         commit('setMails', {});
         commit('setMailsLoadStatus', 3);
       });
     },
-    setDeleteMail: function setDeleteMail(_ref3, id) {
-      var commit = _ref3.commit;
+    getNextMails: function getNextMails(_ref3) {
+      var commit = _ref3.commit,
+          state = _ref3.state,
+          dispatch = _ref3.dispatch;
+      commit('setMailsPage', state.mailsPage + 1);
+      dispatch('getMails');
+    },
+    refreshMails: function refreshMails(_ref4) {
+      var commit = _ref4.commit,
+          dispatch = _ref4.dispatch;
+      commit('setMails', []);
+      commit('setMailsLoadStatus', 1);
+      commit('setMailsPage', 1);
+      commit('setMailsHasNextPage', false);
+      dispatch('getMails');
+    },
+    setDeleteMail: function setDeleteMail(_ref5, id) {
+      var commit = _ref5.commit;
       commit('setDeleteMail', id);
     },
-    deleteMail: function deleteMail(_ref4) {
-      var commit = _ref4.commit,
-          state = _ref4.state,
-          dispatch = _ref4.dispatch;
+    deleteMail: function deleteMail(_ref6) {
+      var commit = _ref6.commit,
+          state = _ref6.state,
+          dispatch = _ref6.dispatch;
       _helpers__WEBPACK_IMPORTED_MODULE_0__["axios"]["delete"]('/inbox-api/' + state.deleteMail).then(function (response) {
         commit('setDeleteMail', 0);
         dispatch('getMails');

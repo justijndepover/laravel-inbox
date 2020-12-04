@@ -22,6 +22,8 @@
                     <span>{{ mail.subject }}</span>
                 </div>
             </router-link>
+
+            <button v-if="mailsHasNextPage" @click="loadMore">Load more</button>
         </div>
     </div>
 </template>
@@ -33,11 +35,14 @@ export default {
     },
     methods: {
         refresh() {
-            this.$store.dispatch('getMails');
+            this.$store.dispatch('refreshMails');
         },
         closeMenu() {
             this.$store.dispatch('closeSidemenu');
         },
+        loadMore() {
+            this.$store.dispatch('getNextMails');
+        }
     },
     computed: {
         mails() {
@@ -50,6 +55,9 @@ export default {
         },
         mailsLoadStatus() {
             return this.$store.getters.getMailsLoadStatus;
+        },
+        mailsHasNextPage() {
+            return this.$store.getters.getMailsHasNextPage;
         },
         sidemenuIsOpen() {
             return this.$store.getters.getSidemenuOpen;

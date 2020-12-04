@@ -8,18 +8,17 @@ class EmailApiController
 {
     public function index()
     {
-        $emails = Email::orderBy('created_at', 'desc')
-            ->get()
-            ->map(function ($email) {
-                return [
-                    'id' => $email->id,
-                    'to_name' => $email->to_name,
-                    'subject' => $email->subject,
-                    'created_at' => $email->created_at->format('d/m/Y'),
-                    'read' => $email->read,
-                    'tags' => $email->getTags(),
-                ];
-            });
+        $emails = Email::orderBy('created_at', 'desc')->paginate(50);
+        $emails->getCollection()->transform(function ($email) {
+            return [
+                'id' => $email->id,
+                'to_name' => $email->to_name,
+                'subject' => $email->subject,
+                'created_at' => $email->created_at->format('d/m/Y'),
+                'read' => $email->read,
+                'tags' => $email->getTags(),
+            ];
+        });
 
         return response()->json($emails);
     }
@@ -48,10 +47,8 @@ class EmailApiController
         return response(null, 204);
     }
 
-    public function template($id)
+    public function template(Email $email)
     {
-        $email = Email::findOrFail($id);
-
         return $email->body;
     }
 }
