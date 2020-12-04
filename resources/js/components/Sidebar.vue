@@ -1,6 +1,6 @@
 <template>
     <div class="h-full w-full max-w-xs bg-gray-200 border-r overflow-scroll z-20 fixed inset-y-0 lg:relative transform transition-all duration-300 lg:translate-x-0" :class="sidemenuIsOpen ? 'translate-x-0' : '-translate-x-full'">
-        <button @click="refresh" class="px-3 py-2 bg-gray-300 hover:bg-gray-400 border-b flex items-center text-gray-700 justify-center w-full">
+        <button @click="refresh" class="px-3 py-2 bg-gray-300 hover:bg-gray-400 border-b flex items-center text-gray-700 justify-center w-full outline-none">
             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
@@ -23,7 +23,7 @@
                 </div>
             </router-link>
 
-            <button v-if="mailsHasNextPage" @click="loadMore">Load more</button>
+            <button v-if="mailsHasNextPage" @click="loadMore" class="block w-full text-center p-2 text-xs text-gray-500 outline-none">Load more</button>
         </div>
     </div>
 </template>

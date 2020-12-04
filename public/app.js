@@ -3137,7 +3137,7 @@ var render = function() {
         "button",
         {
           staticClass:
-            "px-3 py-2 bg-gray-300 hover:bg-gray-400 border-b flex items-center text-gray-700 justify-center w-full",
+            "px-3 py-2 bg-gray-300 hover:bg-gray-400 border-b flex items-center text-gray-700 justify-center w-full outline-none",
           on: { click: _vm.refresh }
         },
         [
@@ -3224,9 +3224,15 @@ var render = function() {
               }),
               _vm._v(" "),
               _vm.mailsHasNextPage
-                ? _c("button", { on: { click: _vm.loadMore } }, [
-                    _vm._v("Load more")
-                  ])
+                ? _c(
+                    "button",
+                    {
+                      staticClass:
+                        "block w-full text-center p-2 text-xs text-gray-500 outline-none",
+                      on: { click: _vm.loadMore }
+                    },
+                    [_vm._v("Load more")]
+                  )
                 : _vm._e()
             ],
             2
